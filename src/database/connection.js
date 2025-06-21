@@ -1,31 +1,18 @@
-import sql from "mssql";
+import pkg from "pg";
+const { Pool } = pkg;
 import { DB_SERVER, PORT, DB_DATABASE, DB_USER, DB_PASSWORD } from "../config.js";
 
 export const dbSettings = {
-    server: DB_SERVER,
-    port: 1433, // Especifica el puerto aquí
+    host: DB_SERVER,
+    port: PORT,
     database: DB_DATABASE,
-    options: {
-        encrypt: false,
-        trustServerCertificate: true,
-    },
-    authentication: {
-        type: "default",
-        options: {
-            userName: DB_USER,
-            password: DB_PASSWORD,
-        },
-    },
+    user: DB_USER,
+    password: DB_PASSWORD,
+    ssl: { rejectUnauthorized: false }, // Si tu proveedor lo requiere
 };
 
-export const getConnection = async () => {
-    try {
-        const pool = await sql.connect(dbSettings);
-        return pool;
-    } catch (error) {
-        console.error("Database connection failed:", error.message);
-        throw error;
-    }
-};
+const pool = new Pool(dbSettings);
 
-export { sql };
+export const getConnection = () => pool;
+
+export { pkg as pg };
