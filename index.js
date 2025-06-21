@@ -1,6 +1,7 @@
-import app from "./src/app.js"
+import app from "./src/app.js";
 
-const port = 3000;
-    app.listen(port, () => {
-        console.log(`Listening on http://localhost:${port}`)
-})
+const SERVER_PORT = 3000; // Cambia el puerto del servidor HTTP
+
+app.listen(SERVER_PORT);
+
+console.log("Server on port", SERVER_PORT);
