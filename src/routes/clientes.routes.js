@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   getClientes,
   createNewClientes,
+  getClienteByData
 } from "../controllers/clientes.controllers.js";
 
 const router = Router();
@@ -9,6 +10,8 @@ const router = Router();
 router.get("/clientes", getClientes);
 
 router.post("/clientes", createNewClientes);
+
+router.get("/clientes/:data/:password", getClienteByData);
 
 router.use((req, res) => {
     res

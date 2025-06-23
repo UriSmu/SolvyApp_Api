@@ -49,6 +49,21 @@ export const createNewClientes = async (req, res) => {
   }
 };
 
+export const getClienteByData = async (req, res) => {
+  try {
+    const pool = getConnection();
+    const { data, password } = req.params;
+    const result = await pool.query(
+      "SELECT * FROM Clientes WHERE (email = $1 or telefono = $1 or nombre_usuario = $1 or dni = $1) and contraseña = $2",
+      [data, password]
+    );
+    if (result.rows.length === 0) return res.sendStatus(404);
+    return res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 // Obtener producto por ID
 export const getProductById = async (req, res) => {
   try {
