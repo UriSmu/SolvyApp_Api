@@ -2,10 +2,6 @@ import { Router } from "express";
 import {
   getClientes,
   createNewClientes,
-  getProductById,
-  deleteProductById,
-  getTotalProducts,
-  updateProductById,
 } from "../controllers/clientes.controllers.js";
 
 const router = Router();
@@ -13,14 +9,6 @@ const router = Router();
 router.get("/clientes", getClientes);
 
 router.post("/clientes", createNewClientes);
-
-router.get("/productos/count", getTotalProducts);
-
-router.get("/productos/:id", getProductById);
-
-router.delete("/productos/:id", deleteProductById);
-
-router.put("/productos/:id", updateProductById);
 
 router.use((req, res) => {
     res
