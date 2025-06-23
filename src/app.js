@@ -12,8 +12,8 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/api", productRoutes);
-app.use("/api", clientRoutes);
+app.use("/prod", productRoutes);
+app.use("/cli", clientRoutes);
 
 app.use((req, res, next) => {
     res.status(404).send('Asegúrese de usar localhost..../api/');
