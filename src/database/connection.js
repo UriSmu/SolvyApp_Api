@@ -11,6 +11,7 @@ export const dbSettings = {
     ssl: { rejectUnauthorized: false }, // Si tu proveedor lo requiere
 };
 
+
 const pool = new Pool(dbSettings);
 
 export const getConnection = () => pool;

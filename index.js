@@ -1,6 +1,6 @@
 import app from "./src/app.js";
 
-const SERVER_PORT = 3000; // Cambia el puerto del servidor HTTP
+const SERVER_PORT = process.env.PORT || 3000; // Usa el puerto de Render o 3000 localmente
 
 app.listen(SERVER_PORT);
 
