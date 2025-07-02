@@ -1,9 +1,8 @@
 import { config } from "dotenv";
 config();
 
-// config.js
-export const DB_SERVER = process.env.DB_SERVER;
-export const DB_DATABASE = process.env.DB_DATABASE;
-export const DB_USER = process.env.DB_USER;
-export const DB_PASSWORD = process.env.DB_PASSWORD;
 export const PORT = process.env.PORT || 5432;
+export const DB_SERVER = "aws-0-sa-east-1.pooler.supabase.com";
+export const DB_DATABASE = "postgres";
+export const DB_USER = "postgres.pcehdqzgprhhutqunmab";
+export const DB_PASSWORD = "9%@%9rz.*y4@FMW";
