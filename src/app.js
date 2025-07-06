@@ -16,7 +16,7 @@ app.use("/prod", productRoutes);
 app.use("/cli", clientRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).send('Asegúrese de usar localhost..../api/');
+    res.status(404).send('Asegúrese de usar https://solvy-app-api.vercel.app/[directorio]/[solicitud]');
 });
 
 export default app;
