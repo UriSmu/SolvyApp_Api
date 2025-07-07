@@ -8,7 +8,7 @@ import {
 const router = Router();
 
 // 1. Traer todos los servicios
-router.get("/", getServicios);
+router.get("/servicios", getServicios);
 
 // 2. Traer todos los subservicios de un servicio
 router.get("/:idservicio/subservicios", getSubserviciosByServicio);
