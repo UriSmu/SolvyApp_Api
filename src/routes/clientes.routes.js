@@ -14,7 +14,7 @@ router.post("/clientes", createNewClientes);
 
 router.get("/clientes/:data/:password", getClienteByData);
 
-router.get("/actividades/:idCliente", getActividadesByCliente);
+router.get("/actividades/:id", getActividadesByCliente);
 
 router.use((req, res) => {
     res

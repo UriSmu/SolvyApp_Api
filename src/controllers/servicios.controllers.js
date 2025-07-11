@@ -41,3 +41,18 @@ export const getPreciosSubservicio = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const getNombreSubServicio = async (req, res) => {
+  try {
+    const pool = getConnection();
+    const { idsubservicio } = req.params;
+    const result = await pool.query(
+      "SELECT nombre FROM subservicios WHERE idsubservicio = $1",
+      [idSubservicio]
+    );
+    if (result.rows.length === 0) return res.sendStatus(404);
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

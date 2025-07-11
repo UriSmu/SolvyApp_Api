@@ -3,6 +3,7 @@ import {
   getServicios,
   getSubserviciosByServicio,
   getPreciosSubservicio,
+  getNombreSubServicio
 } from "../controllers/servicios.controllers.js";
 
 const router = Router();
@@ -15,5 +16,7 @@ router.get("/:idservicio/subservicios", getSubserviciosByServicio);
 
 // 3. Buscar precio base y por tiempo de un subservicio
 router.get("/subservicio/:idsubservicio/precios", getPreciosSubservicio);
+
+router.get("/nombresubservicio/:idSubervicio", getNombreSubServicio);
 
 export default router;
