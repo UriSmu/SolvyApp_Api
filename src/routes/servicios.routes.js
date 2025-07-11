@@ -17,6 +17,6 @@ router.get("/:idservicio/subservicios", getSubserviciosByServicio);
 // 3. Buscar precio base y por tiempo de un subservicio
 router.get("/subservicio/:idsubservicio/precios", getPreciosSubservicio);
 
-router.get("/nombresubservicio/:idSubervicio", getNombreSubServicio);
+router.get("/nombresubservicio/:id", getNombreSubServicio);
 
 export default router;

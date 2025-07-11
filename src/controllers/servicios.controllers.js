@@ -45,10 +45,9 @@ export const getPreciosSubservicio = async (req, res) => {
 export const getNombreSubServicio = async (req, res) => {
   try {
     const pool = getConnection();
-    const { idsubservicio } = req.params;
     const result = await pool.query(
       "SELECT nombre FROM subservicios WHERE idsubservicio = $1",
-      [idSubservicio]
+      [req.params.id]
     );
     if (result.rows.length === 0) return res.sendStatus(404);
     res.json(result.rows[0]);
