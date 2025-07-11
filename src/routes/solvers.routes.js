@@ -3,7 +3,8 @@ import {
   getSolvers,
   createNewSolvers,
   getSolverByData,
-  getActividadesBySolver
+  getActividadesBySolver,
+  getSolverById
 } from "../controllers/solvers.controllers.js";
 
 const router = Router();
@@ -15,6 +16,8 @@ router.post("/solvers", createNewSolvers);
 router.get("/solvers/:data/:password", getSolverByData);
 
 router.get("/actividades/:id", getActividadesBySolver);
+
+router.get("/solver/:id", getSolverById)
 
 router.use((req, res) => {
     res

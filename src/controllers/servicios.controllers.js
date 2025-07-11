@@ -55,3 +55,13 @@ export const getNombreSubServicio = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const getSolversPorServicio = async (req, res) => {
+  try {
+    const pool = getConnection();
+    const result = await pool.query("SELECT Solvers.* FROM Solvers LEFT JOIN solverservicio ON solvers.idsolver = solverservicio.idsolver WHERE solverservicio.idservicio = 1;", [req.params.id]);
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}

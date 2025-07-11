@@ -3,7 +3,8 @@ import {
   getServicios,
   getSubserviciosByServicio,
   getPreciosSubservicio,
-  getNombreSubServicio
+  getNombreSubServicio,
+  getSolversPorServicio
 } from "../controllers/servicios.controllers.js";
 
 const router = Router();
@@ -18,5 +19,7 @@ router.get("/:idservicio/subservicios", getSubserviciosByServicio);
 router.get("/subservicio/:idsubservicio/precios", getPreciosSubservicio);
 
 router.get("/nombresubservicio/:id", getNombreSubServicio);
+
+router.get("/solvers/:id", getSolversPorServicio);
 
 export default router;

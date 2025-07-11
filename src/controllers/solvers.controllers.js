@@ -77,3 +77,13 @@ export const getActividadesBySolver = async (req, res) => {
     res.status(500).send(error.message);
   }
 }
+
+export const getSolverById = async (req, res) => {
+  try {
+    const pool = getConnection();
+    const result = await pool.query("SELECT * FROM Solvers WHERE idsolver = $1", [req.params.id]);
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
