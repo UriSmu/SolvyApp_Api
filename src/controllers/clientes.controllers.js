@@ -68,7 +68,7 @@ export const getActividadesByCliente = async (req, res) => {
   try {
     const pool = getConnection();
     const result = await pool.query("SELECT * FROM Solicitudes WHERE idcliente = $1", [req.params.id]);
-    res.json({ total: parseInt(result.rows[0].count, 10) });
+    res.json(result.rows);
   } catch (error) {
     res.status(500).send(error.message);
   }
