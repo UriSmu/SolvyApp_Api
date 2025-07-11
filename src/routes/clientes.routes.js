@@ -2,7 +2,8 @@ import { Router } from "express";
 import {
   getClientes,
   createNewClientes,
-  getClienteByData
+  getClienteByData,
+  getActividadesByCliente
 } from "../controllers/clientes.controllers.js";
 
 const router = Router();
@@ -12,6 +13,8 @@ router.get("/clientes", getClientes);
 router.post("/clientes", createNewClientes);
 
 router.get("/clientes/:data/:password", getClienteByData);
+
+router.get("/actividades/:idCliente", getActividadesByCliente);
 
 router.use((req, res) => {
     res
