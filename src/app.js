@@ -6,6 +6,7 @@ import productRoutes from "./routes/productos.routes.js";
 import clientRoutes from "./routes/clientes.routes.js";
 import serviciosRoutes from "./routes/servicios.routes.js";
 import solverRoutes from "./routes/solvers.routes.js"
+import reseniasSolverRoutes from "./routes/resenias-solver.routes.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/prod", productRoutes);
 app.use("/cli", clientRoutes);
 app.use("/ser", serviciosRoutes);
 app.use("/sol", solverRoutes);
+app.use("/ressol", reseniasSolverRoutes);
 
 app.use((req, res, next) => {
     res.status(404).send('Asegúrese de usar https://solvy-app-api.vercel.app/[directorio]/[solicitud]');
