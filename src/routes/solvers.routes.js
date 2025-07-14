@@ -7,17 +7,19 @@ import {
   getSolverById
 } from "../controllers/solvers.controllers.js";
 
+import { verifyToken } from "../middlewares/auth.js";
+
 const router = Router();
 
-router.get("/solvers", getSolvers);
+router.get("/solvers", verifyToken, getSolvers);
 
 router.post("/solvers", createNewSolvers);
 
 router.get("/solvers/:data/:password", getSolverByData);
 
-router.get("/actividades/:id", getActividadesBySolver);
+router.get("/actividades/:id", verifyToken, getActividadesBySolver);
 
-router.get("/solver/:id", getSolverById)
+router.get("/solver/:id", verifyToken, getSolverById)
 
 router.use((req, res) => {
     res

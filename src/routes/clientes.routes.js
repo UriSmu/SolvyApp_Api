@@ -5,16 +5,15 @@ import {
   getClienteByData,
   getActividadesByCliente
 } from "../controllers/clientes.controllers.js";
+import { verifyToken } from "../middlewares/auth.js";
 
 const router = Router();
 
-router.get("/clientes", getClientes);
+router.get("/clientes", verifyToken, getClientes); // protegida
+router.post("/clientes", createNewClientes); // pública (registro)
+router.get("/clientes/:data/:password", getClienteByData); // pública (login)
+router.get("/actividades/:id", verifyToken, getActividadesByCliente); // protegida
 
-router.post("/clientes", createNewClientes);
-
-router.get("/clientes/:data/:password", getClienteByData);
-
-router.get("/actividades/:id", getActividadesByCliente);
 
 router.use((req, res) => {
     res

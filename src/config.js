@@ -6,3 +6,4 @@ export const DB_SERVER = "aws-0-sa-east-1.pooler.supabase.com";
 export const DB_DATABASE = "postgres";
 export const DB_USER = "postgres.pcehdqzgprhhutqunmab";
 export const DB_PASSWORD = "9%@%9rz.*y4@FMW";
+export const JWT_SECRET = "SolvY_PoPi-2025_RaBA-VIto";
