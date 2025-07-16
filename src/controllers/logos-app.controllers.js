@@ -31,3 +31,14 @@ export const getLogosByServicio = async (req, res) => {
         res.status(500).send(error.message);
     }
 };
+
+export const getLogoById = async (req, res) => {
+    try {
+        const pool = getConnection();
+        const result = await pool.query("SELECT * FROM logos_app WHERE idlogosapp = $1", [req.params.id]);
+        res.json(result.rows);
+    } 
+    catch (error) {
+        res.status(500).send(error.message);
+    }
+};

@@ -2,7 +2,8 @@ import { Router } from "express";
 import {
   getLogos,
   getLogosByServicio,
-  getLogosBySubservicio
+  getLogosBySubservicio,
+  getLogoById
 } from "../controllers/logos-app.controllers.js";
 
 const router = Router();
@@ -10,6 +11,7 @@ const router = Router();
 router.get("/todos", getLogos);
 router.get("/serv/:id", getLogosByServicio);
 router.get("/subserv/:id", getLogosBySubservicio);
+router.get("/logo/:id", getLogoById);
 
 router.use((req, res) => {
     res
