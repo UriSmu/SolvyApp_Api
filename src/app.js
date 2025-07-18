@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use("/prod", verifyToken, productRoutes);
 app.use("/cli", clientRoutes);
-app.use("/ser", verifyToken, serviciosRoutes);
+app.use("/ser", serviciosRoutes);
 app.use("/sol", solverRoutes);
 app.use("/ressol", verifyToken, reseniasSolverRoutes);
 app.use("/logos", logosAppRoutes);

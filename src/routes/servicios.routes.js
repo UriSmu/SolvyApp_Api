@@ -6,6 +6,7 @@ import {
   getNombreSubServicio,
   getSolversPorServicio
 } from "../controllers/servicios.controllers.js";
+import { verifyToken } from "../middlewares/auth.js";
 
 const router = Router();
 
@@ -20,6 +21,6 @@ router.get("/subservicio/:idsubservicio/precios", getPreciosSubservicio);
 
 router.get("/nombresubservicio/:id", getNombreSubServicio);
 
-router.get("/solvers/:id", getSolversPorServicio);
+router.get("/solvers/:id", verifyToken, getSolversPorServicio);
 
 export default router;
