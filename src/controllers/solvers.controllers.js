@@ -29,7 +29,8 @@ export const createNewSolvers = async (req, res) => {
     fotodnifrente,
     fotodnidorso,
     fotopersonal,
-    certificadoantecedentesp
+    certificadoantecedentesp,
+    edad
   } = req.body;
 
   if (
@@ -42,7 +43,8 @@ export const createNewSolvers = async (req, res) => {
     nombre_usuario == null ||
     contraseña == null ||
     dni == null ||
-    movilidad_propia == null
+    movilidad_propia == null ||
+    edad == null
   ) {
     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
   }
@@ -51,9 +53,9 @@ export const createNewSolvers = async (req, res) => {
     const pool = getConnection();
     const result = await pool.query(
       `INSERT INTO Solvers 
-      (nombre, apellido, direccion, nacionalidad, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *`,
-      [nombre, apellido, direccion, nacionalidad, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp]
+      (nombre, apellido, direccion, nacionalidad, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp, edad) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *`,
+      [nombre, apellido, direccion, nacionalidad, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp, edad]
     );
     res.json(result.rows[0]);
   } catch (error) {
