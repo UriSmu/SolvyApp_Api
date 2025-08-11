@@ -24,7 +24,11 @@ export const createNewSolvers = async (req, res) => {
     dni,
     movilidad_propia,
     tipo_vehiculo,
-    cuil_o_cuit
+    cuil_o_cuit,
+    fotodnifrente,
+    fotodnidorso,
+    fotopersonal,
+    certificadoantecedentesp
   } = req.body;
 
   if (
@@ -44,8 +48,10 @@ export const createNewSolvers = async (req, res) => {
   try {
     const pool = getConnection();
     const result = await pool.query(
-      "INSERT INTO Solvers (nombre, apellido, direccion, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
-      [nombre, apellido, direccion, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit]
+      `INSERT INTO Solvers 
+      (nombre, apellido, direccion, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`,
+      [nombre, apellido, direccion, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp]
     );
     res.json(result.rows[0]);
   } catch (error) {
