@@ -52,7 +52,7 @@ export const createNewSolvers = async (req, res) => {
     const result = await pool.query(
       `INSERT INTO Solvers 
       (nombre, apellido, direccion, nacionalidad, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`,
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *`,
       [nombre, apellido, direccion, nacionalidad, email, telefono, nombre_usuario, contraseña, dni, movilidad_propia, tipo_vehiculo, cuil_o_cuit, fotodnifrente, fotodnidorso, fotopersonal, certificadoantecedentesp]
     );
     res.json(result.rows[0]);
