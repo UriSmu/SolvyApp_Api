@@ -115,3 +115,83 @@ export const resetPasswordSolver = async (req, res) => {
     res.status(500).send(error.message);
   }
 }
+
+// 1. Agregar servicio a un solver
+export const addServicioToSolver = async (req, res) => {
+  const { idsolver, idservicio, estudios, certificadoestudios, experiencia } = req.body;
+  if (
+    idsolver == null ||
+    idservicio == null ||
+    estudios == null ||
+    experiencia == null ||
+    (estudios === true && !certificadoestudios)
+  ) {
+    return res.status(400).json({ msg: "Faltan campos obligatorios" });
+  }
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `INSERT INTO solverservicio (idsolver, idservicio, estudios, certificadoestudios, experiencia)
+       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [idsolver, idservicio, estudios, certificadoestudios || null, experiencia]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// 2. Agregar subservicio a un servicio de un solver
+export const addSubservicioToSolverServicio = async (req, res) => {
+  const { idsolverservicio, idsubservicio } = req.body;
+  if (!idsolverservicio || !idsubservicio) {
+    return res.status(400).json({ msg: "Faltan campos obligatorios" });
+  }
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `INSERT INTO solvserv_subservicio (idsolverservicio, idsubservicio)
+       VALUES ($1, $2) RETURNING *`,
+      [idsolverservicio, idsubservicio]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// 3. Traer todos los servicios que puede hacer un solver
+export const getServiciosBySolver = async (req, res) => {
+  const { idsolver } = req.params;
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `SELECT ss.*, s.nombre AS nombre_servicio
+       FROM solverservicio ss
+       JOIN servicios s ON ss.idservicio = s.idservicio
+       WHERE ss.idsolver = $1`,
+      [idsolver]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+// 4. Traer todos los subservicios de un servicio que puede hacer un solver
+export const getSubserviciosBySolverServicio = async (req, res) => {
+  const { idsolverservicio } = req.params;
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `SELECT ss.*, sub.nombre AS nombre_subservicio
+       FROM solvserv_subservicio ss
+       JOIN subservicios sub ON ss.idsubservicio = sub.idsubservicio
+       WHERE ss.idsolverservicio = $1`,
+      [idsolverservicio]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

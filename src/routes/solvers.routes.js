@@ -5,7 +5,11 @@ import {
   getSolverByData,
   getActividadesBySolver,
   getSolverById,
-  resetPasswordSolver
+  resetPasswordSolver,
+  addServicioToSolver, // <-- nuevo
+  addSubservicioToSolverServicio, // <-- nuevo
+  getServiciosBySolver, // <-- nuevo
+  getSubserviciosBySolverServicio // <-- nuevo
 } from "../controllers/solvers.controllers.js";
 
 import { verifyToken } from "../middlewares/auth.js";
@@ -23,6 +27,14 @@ router.get("/actividades/:id", verifyToken, getActividadesBySolver);
 router.get("/solver/:id", verifyToken, getSolverById)
 
 router.put("/solvers/reset-password", verifyToken, resetPasswordSolver);
+
+router.post("/solverservicio", verifyToken, addServicioToSolver);
+
+router.post("/solverservicio/subservicio", verifyToken, addSubservicioToSolverServicio);
+
+router.get("/solverservicio/:idsolver", verifyToken, getServiciosBySolver);
+
+router.get("/solverservicio/subservicio/:idsolverservicio", verifyToken, getSubserviciosBySolverServicio);
 
 router.use((req, res) => {
     res
