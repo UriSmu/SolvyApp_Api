@@ -84,3 +84,21 @@ export const getActividadesByCliente = async (req, res) => {
     res.status(500).send(error.message);
   }
 }
+
+export const resetPasswordCliente = async (req, res) => {
+  const { data, newPassword } = req.body;
+  if (!data || !newPassword) {
+    return res.status(400).json({ msg: "Bad Request. Please provide data and newPassword" });
+  }
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      "UPDATE Clientes SET contraseña = $2 WHERE email = $1 OR telefono = $1 OR nombre_usuario = $1 OR dni = $1 RETURNING *",
+      [data, newPassword]
+    );
+    if (result.rows.length === 0) return res.sendStatus(404);
+    res.json({ msg: "Contraseña actualizada correctamente" });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}

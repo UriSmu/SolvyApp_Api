@@ -3,7 +3,8 @@ import {
   getClientes,
   createNewClientes,
   getClienteByData,
-  getActividadesByCliente
+  getActividadesByCliente,
+  resetPasswordCliente
 } from "../controllers/clientes.controllers.js";
 import { verifyToken } from "../middlewares/auth.js";
 
@@ -13,6 +14,7 @@ router.get("/clientes", verifyToken, getClientes); // protegida
 router.post("/clientes", createNewClientes); // pública (registro)
 router.get("/clientes/:data/:password", getClienteByData); // pública (login)
 router.get("/actividades/:id", verifyToken, getActividadesByCliente); // protegida
+router.put("/reset-password", resetPasswordCliente); // pública (reset de contraseña)
 
 
 router.use((req, res) => {

@@ -4,7 +4,8 @@ import {
   createNewSolvers,
   getSolverByData,
   getActividadesBySolver,
-  getSolverById
+  getSolverById,
+  resetPasswordSolver
 } from "../controllers/solvers.controllers.js";
 
 import { verifyToken } from "../middlewares/auth.js";
@@ -20,6 +21,8 @@ router.get("/solvers/:data/:password", getSolverByData);
 router.get("/actividades/:id", verifyToken, getActividadesBySolver);
 
 router.get("/solver/:id", verifyToken, getSolverById)
+
+router.put("/solvers/reset-password", verifyToken, resetPasswordSolver);
 
 router.use((req, res) => {
     res
