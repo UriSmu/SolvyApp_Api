@@ -4,7 +4,8 @@ import {
   getSubserviciosByServicio,
   getPreciosSubservicio,
   getNombreSubServicio,
-  getSolversPorServicio
+  getSolversPorServicio,
+  getSolversPorSubServicio
 } from "../controllers/servicios.controllers.js";
 import { verifyToken } from "../middlewares/auth.js";
 
@@ -22,5 +23,7 @@ router.get("/subservicio/:idsubservicio/precios", getPreciosSubservicio);
 router.get("/nombresubservicio/:id", getNombreSubServicio);
 
 router.get("/solvers/:id", verifyToken, getSolversPorServicio);
+
+router.get("/solversubservicio/:id", verifyToken, getSolversPorSubServicio);
 
 export default router;
