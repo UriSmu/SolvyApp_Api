@@ -69,7 +69,7 @@ export const getSolversPorServicio = async (req, res) => {
 export const getSolversPorSubServicio = async (req, res) => {
   try {
     const pool = getConnection();
-    const result = await pool.query("SELECT Solvers.* FROM Solvers LEFT JOIN solverservicio ON solvers.idsolver = solverservicio.idsolver LEFT JOIN solvserv_subservicio ON solverservicio.idsolverservicio = solvserv_subservicio.idsolverservicio WHERE solvserv_subservicio.idsubservicio = $1", [req.params.id]);
+    const result = await pool.query("SELECT Solvers.* FROM Solvers LEFT JOIN solverservicio ON solvers.idsolver = solverservicio.idsolver LEFT JOIN solvserv_subservicio ON solverservicio.idsolverservicio = solvserv_subservicio.idsolverservicio WHERE solvserv_subservicio.idsubservicio = $1 AND solvers.esta_disponible = true", [req.params.id]);
     res.json(result.rows);
   } catch (error) {
     res.status(500).send(error.message);
