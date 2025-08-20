@@ -1,4 +1,6 @@
 import { getConnection } from "../database/connection.js";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config.js";
 
 // Obtener todos los Solvers
 export const getSolvers = async (req, res) => {
@@ -72,7 +74,16 @@ export const getSolverByData = async (req, res) => {
       [data, password]
     );
     if (result.rows.length === 0) return res.sendStatus(404);
-    return res.json(result.rows[0]);
+
+    // Generar el token JWT
+    const user = result.rows[0];
+    const token = jwt.sign(
+      { id: user.idsolver, email: user.email, nombre: user.nombre },
+      JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
+    return res.json({ user, token });
   } catch (error) {
     res.status(500).send(error.message);
   }
