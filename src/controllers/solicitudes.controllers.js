@@ -29,6 +29,7 @@ export const createSolicitud = async (req, res) => {
     );
     res.json(result.rows[0]);
   } catch (error) {
+    console.error('Error al crear solicitud:', error); // <-- Agrega este log
     res.status(500).send(error.message);
   }
 };
