@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 // 1. Crear solicitud
-router.post("/", createSolicitud);
+router.post("/nuevasolicitud", createSolicitud);
 
 // 2. Asignar solver y código de confirmación
 router.put("/:idsolicitud/asignar", asignarSolver);
