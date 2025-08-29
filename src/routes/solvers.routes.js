@@ -9,7 +9,8 @@ import {
   addServicioToSolver, // <-- nuevo
   addSubservicioToSolverServicio, // <-- nuevo
   getServiciosBySolver, // <-- nuevo
-  getSubserviciosBySolverServicio // <-- nuevo
+  getSubserviciosBySolverServicio, // <-- nuevo
+  getSolverServicioBySolverAndServicio // <-- nuevo
 } from "../controllers/solvers.controllers.js";
 
 import { verifyToken } from "../middlewares/auth.js";
@@ -35,6 +36,8 @@ router.post("/solverservicio/subservicio", verifyToken, addSubservicioToSolverSe
 router.get("/solverservicio/:idsolver", verifyToken, getServiciosBySolver);
 
 router.get("/solverservicio/subservicio/:idsolverservicio", verifyToken, getSubserviciosBySolverServicio);
+
+router.get("/solverservicio/:idsolver/:idservicio", verifyToken, getSolverServicioBySolverAndServicio);
 
 router.use((req, res) => {
     res
