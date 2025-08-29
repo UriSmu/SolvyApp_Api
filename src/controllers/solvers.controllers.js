@@ -195,10 +195,10 @@ export const getSubserviciosBySolverServicio = async (req, res) => {
   try {
     const pool = getConnection();
     const result = await pool.query(
-      `SELECT ss.*, sub.nombre AS nombre_subservicio
-       FROM solvserv_subservicio ss
-       JOIN subservicios sub ON ss.idsubservicio = sub.idsubservicio
-       WHERE ss.idsolverservicio = $1`,
+      `SELECT ss.*, sub.nombre, sub.idlogosapp
+      FROM solvserv_subservicio ss
+      JOIN subservicios sub ON ss.idsubservicio = sub.idsubservicio
+      WHERE ss.idsolverservicio = $1`,
       [idsolverservicio]
     );
     res.json(result.rows);
