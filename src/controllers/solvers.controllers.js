@@ -207,3 +207,16 @@ export const getSubserviciosBySolverServicio = async (req, res) => {
   }
 };
 
+export const getSolverServicioBySolverAndServicio = async (req, res) => {
+  const { idsolver, idservicio } = req.params;
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `SELECT * FROM solverservicio WHERE idsolver = $1 AND idservicio = $2`,
+      [idsolver, idservicio]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
