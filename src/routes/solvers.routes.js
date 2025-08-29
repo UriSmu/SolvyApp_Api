@@ -10,7 +10,8 @@ import {
   addSubservicioToSolverServicio, // <-- nuevo
   getServiciosBySolver, // <-- nuevo
   getSubserviciosBySolverServicio, // <-- nuevo
-  getSolverServicioBySolverAndServicio // <-- nuevo
+  getSolverServicioBySolverAndServicio,
+  deleteSubServicioBySolverAndServicio
 } from "../controllers/solvers.controllers.js";
 
 import { verifyToken } from "../middlewares/auth.js";
@@ -38,6 +39,8 @@ router.get("/solverservicio/:idsolver", verifyToken, getServiciosBySolver);
 router.get("/solverservicio/subservicio/:idsolverservicio", verifyToken, getSubserviciosBySolverServicio);
 
 router.get("/solverservicio/:idsolver/:idservicio", verifyToken, getSolverServicioBySolverAndServicio);
+
+router.delete("/solverservicio/:idsolverservicio/:idsubservicio", verifyToken, deleteSubServicioBySolverAndServicio);
 
 router.use((req, res) => {
     res

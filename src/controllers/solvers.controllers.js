@@ -220,3 +220,17 @@ export const getSolverServicioBySolverAndServicio = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const deleteSubServicioBySolverAndServicio = async (req, res) => {
+  const { idsolverservicio, idsubservicio } = req.params;
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `DELETE FROM solvserv_subservicio WHERE idsolverservicio = $1 AND idsubservicio = $2`,
+      [idsolverservicio, idsubservicio]
+    );
+    res.json({ msg: "Subservicio eliminado correctamente" });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
