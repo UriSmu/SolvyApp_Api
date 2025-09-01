@@ -133,3 +133,18 @@ export const getCodigoConfirmacion = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+// 8. Obtener código de inicio de una solicitud
+export const getCodigoInicio = async (req, res) => {
+  const { idsolicitud } = req.params;
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `SELECT codigo_inicial FROM solicitudes WHERE idsolicitud = $1`,
+      [idsolicitud]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
