@@ -5,7 +5,8 @@ import {
   iniciarServicio,
   finalizarServicio,
   getSolicitudesBySolver,
-  getSolicitudesByCliente
+  getSolicitudesByCliente,
+  getCodigoConfirmacion,
 } from "../controllers/solicitudes.controllers.js";
 
 const router = Router();
@@ -27,6 +28,8 @@ router.get("/solver/:idsolver", getSolicitudesBySolver);
 
 // 6. Solicitudes por cliente
 router.get("/cliente/:idcliente", getSolicitudesByCliente);
+
+router.get("/codigo/:idsolicitud", getCodigoConfirmacion);
 
 router.use((req, res) => {
   res.status(404).send('<img src="https://http.cat/404.jpg" alt="404 Not Found" />');
