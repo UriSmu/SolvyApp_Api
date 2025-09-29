@@ -148,3 +148,18 @@ export const getCodigoInicio = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const agregarProductos = async (req, res) => {
+  const { idsolicitud } = req.params;
+  const { productos } = req.body; // Esperamos un array de productos
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `UPDATE solicitudes SET productos_usados = $1 WHERE idsolicitud = $2 RETURNING *`,
+      [productos, idsolicitud]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
