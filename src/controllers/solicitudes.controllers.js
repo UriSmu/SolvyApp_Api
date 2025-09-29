@@ -75,13 +75,13 @@ export const iniciarServicio = async (req, res) => {
 // 4. Finalizar servicio: guardar descarga y hora final
 export const finalizarServicio = async (req, res) => {
   const { idsolicitud } = req.params;
-  const { descargas } = req.body;
+  const { parte_trabajo } = req.body;
   const hora_final = new Date();
   try {
     const pool = getConnection();
     const result = await pool.query(
-      `UPDATE solicitudes SET descargas = $1, horafinal = $2 WHERE idsolicitud = $3 RETURNING *`,
-      [descargas, hora_final, idsolicitud]
+      `UPDATE solicitudes SET parte_trabajo = $1, horafinal = $2 WHERE idsolicitud = $3 RETURNING *`,
+      [parte_trabajo, hora_final, idsolicitud]
     );
     res.json(result.rows[0]);
   } catch (error) {
