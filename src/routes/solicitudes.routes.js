@@ -8,7 +8,8 @@ import {
   getSolicitudesByCliente,
   getCodigoConfirmacion,
   getCodigoInicio,
-  agregarProductos
+  agregarProductos,
+  getProductosByServicio
 } from "../controllers/solicitudes.controllers.js";
 
 const router = Router();
@@ -36,6 +37,8 @@ router.get("/codigo/:idsolicitud", getCodigoConfirmacion);
 router.get("/iniciar/:idsolicitud", getCodigoInicio);
 
 router.put("/agregar-productos/:idsolicitud", agregarProductos);
+
+router.get("/productos/:idsolicitud", getProductosByServicio);
 
 router.use((req, res) => {
   res.status(404).send('<img src="https://http.cat/404.jpg" alt="404 Not Found" />');

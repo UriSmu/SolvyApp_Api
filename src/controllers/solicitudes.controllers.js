@@ -170,3 +170,17 @@ export const agregarProductos = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const getProductosByServicio = async (req, res) => {
+  const { idsolicitud } = req.params;
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      `SELECT productos_usados FROM solicitudes WHERE idsolicitud = $1`,
+      [idsolicitud]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
