@@ -76,7 +76,7 @@ export const iniciarServicio = async (req, res) => {
 export const finalizarServicio = async (req, res) => {
   const { idsolicitud } = req.params;
   const { parte_trabajo } = req.body;
-  const hora_final = new Date();
+  const { hora_final } = req.body;
   try {
     const pool = getConnection();
     const result = await pool.query(
