@@ -155,7 +155,14 @@ export const agregarProductos = async (req, res) => {
   try {
     const pool = getConnection();
     const result = await pool.query(
-      `UPDATE solicitudes SET productos_usados = $1 WHERE idsolicitud = $2 RETURNING *`,
+      `UPDATE solicitudes 
+       SET productos_usados = 
+         CASE 
+           WHEN productos_usados IS NULL THEN $1
+           ELSE productos_usados || $1
+         END
+       WHERE idsolicitud = $2 
+       RETURNING *`,
       [productos, idsolicitud]
     );
     res.json(result.rows[0]);
