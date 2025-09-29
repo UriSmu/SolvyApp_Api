@@ -97,3 +97,30 @@ export const updateProductById = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const getProductByCategoria = async (req, res) => {
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      "SELECT * FROM Productos WHERE idcategoria = $1",
+      [req.params.id]
+    );
+    if (result.rows.length === 0) return res.sendStatus(404);
+    return res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export const getCategorias = async (req, res) => {
+  try {
+    const pool = getConnection();
+    const result = await pool.query(
+      "SELECT * FROM Categorias"
+    );
+    if (result.rows.length === 0) return res.sendStatus(404);
+    return res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

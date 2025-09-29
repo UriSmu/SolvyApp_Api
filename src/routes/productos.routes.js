@@ -6,6 +6,8 @@ import {
   deleteProductById,
   getTotalProducts,
   updateProductById,
+  getProductByCategoria,
+  getCategorias
 } from "../controllers/productos.controllers.js";
 
 const router = Router();
@@ -21,6 +23,10 @@ router.get("/productos/:id", getProductById);
 router.delete("/productos/:id", deleteProductById);
 
 router.put("/productos/:id", updateProductById);
+
+router.get("categoria/:id", getProductByCategoria);
+
+router.get("/categorias", getCategorias);
 
 router.use((req, res) => {
     res
